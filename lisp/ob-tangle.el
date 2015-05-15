@@ -543,7 +543,10 @@ which enable the original code blocks to be found."
       (org-edit-special)
       ;; Then move forward the correct number of characters in the
       ;; code buffer.
-      (forward-char (- mid body-start))
+      (condition-case err
+	  (forward-char (- mid body-start))
+	(error (message "mid %d body-start %d\nerror message: %s"
+			mid body-start (error-message-string err))))
       ;; And return to the Org-mode buffer with the point in the right
       ;; place.
       (org-edit-src-exit)
