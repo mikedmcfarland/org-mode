@@ -97,7 +97,8 @@ This function is called by `org-babel-execute-src-block'"
 If RESULTS look like a table, then convert them into an
 Emacs-lisp table, otherwise return the results as a string."
   (org-babel-read
-   (if (and (stringp results) (string-match "^\\[.+\\]$" results))
+   (if (and (stringp results) (string-match "^\\[\\(.*\n?\\)*?\\]$"
+					    results))
        (org-babel-read
         (concat "'"
                 (replace-regexp-in-string
